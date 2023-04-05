@@ -12,9 +12,8 @@ const requiredContentPaths = [
 
 // Initialize Firebase
 const firebase = require("firebase-admin")
-const serviceAccount = require("../config/serviceaccount.json")
 firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount),
+  credential: firebase.credential.applicationDefault(),
   databaseURL: process.env.FIREBASE_DATABASE_URL,
 })
 const database = firebase.database()
@@ -69,7 +68,7 @@ module.exports = function(app) {
     // for testing
     database
       .ref("lastupdated")
-      .set(new Date().toISOString)
+      .set(new Date().toISOString())
       .then(() => console.log("version updated"))
 
     // get manifest from bungie api
