@@ -29,7 +29,7 @@ app.get("/api/manifest/get", function (req, res, next) {
     .catch((err) => next(err))
 })
 
-require('./contentPathsJson')(app)
+require('./routes/contentPathsJson')(app)
 
 // Listen for connections
 const PORT = process.env.PORT || 3001
