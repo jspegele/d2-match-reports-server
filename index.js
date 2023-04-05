@@ -4,12 +4,14 @@ const secure = require("ssl-express-www")
 const app = express()
 const axios = require("axios").default
 const https = require("https")
-const fs = require("fs")
-const unzipper = require("unzipper")
 
 // Middleware
 app.use(secure)
 app.use(express.json())
+
+app.get('/', (req, res) => {
+  res.send('D2 Activity History Server')
+})
 
 // Add headerto all requests
 app.all("/*", function (req, res, next) {
@@ -17,16 +19,6 @@ app.all("/*", function (req, res, next) {
   // const now = new Date()
   // console.log(req.method, req.url, now.toISOString())
   next()
-})
-
-// Returns full manifest
-app.get("/api/manifest/get", function (req, res, next) {
-  axios
-    .get(`${apiRoot}/Destiny2/Manifest/`)
-    .then((manifestRes) => {
-      res.json(manifestRes.data)
-    })
-    .catch((err) => next(err))
 })
 
 require('./routes/contentPathsJson')(app)
