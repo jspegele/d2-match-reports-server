@@ -31,7 +31,11 @@ module.exports = function(app) {
   // Create single definition
   function convertDefinition(node) {
     // get manifest from bungie api
-    axios.get(`${apiRoot}/Destiny2/Manifest/`).then((manifestRres) => {
+    axios.get(`${apiRoot}/Destiny2/Manifest/`, {
+      headers: {
+        "X-API-Key": process.env.BUNGIE_API_KEY,
+      },
+    }).then((manifestRres) => {
       const manifest = manifestRres.data.Response
       const contentPaths = manifest.jsonWorldComponentContentPaths.en
   
@@ -69,11 +73,14 @@ module.exports = function(app) {
     database
       .ref("lastupdated")
       .set(new Date().toISOString())
-      .then(() => console.log("version updated"))
 
     // get manifest from bungie api
     axios
-      .get(`${apiRoot}/Destiny2/Manifest/`)
+      .get(`${apiRoot}/Destiny2/Manifest/`, {
+        headers: {
+          "X-API-Key": process.env.BUNGIE_API_KEY,
+        },
+      })
       .then((res) => {
         const bungieVersion = res.data.Response.version
 
