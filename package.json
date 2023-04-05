@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Destiny 2 Activity Reports",
   "main": "index.js",
-  "scripts": {
-    "start": "node src/index.js",
-    "build": "npm install --omit=dev && npm run build"
-  },
   "engines": {
     "node": ">=16.0.0"
   },
