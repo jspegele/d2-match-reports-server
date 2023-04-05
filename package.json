@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "build": "npm run build"
+    "build": "npm install --omit=dev && npm run build"
   },
   "engines": {
     "node": ">=16.0.0"
