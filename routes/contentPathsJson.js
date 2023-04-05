@@ -84,19 +84,15 @@ module.exports = function(app) {
             const localVersion = snap.val()
             
             // return function if local version is up to date
-            if (bungieVersion === localVersion) {
-              console.log('up to date')
-              return
+            if (bungieVersion !== localVersion) {
+              // Create convertDefinition calls
+              requiredContentPaths.forEach((path) => convertDefinition(path))
+  
+              // Set local version
+              database
+                .ref("version")
+                .set(bungieVersion)
             }
-
-            // Create convertDefinition calls
-            requiredContentPaths.forEach((path) => convertDefinition(path))
-
-            // Set local version
-            database
-              .ref("version")
-              .set(bungieVersion)
-              .then(() => console.log("version updated"))
           })
       })
       .catch((err) => console.log(err))
